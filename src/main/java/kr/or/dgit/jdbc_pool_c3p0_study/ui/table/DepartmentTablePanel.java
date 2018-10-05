@@ -28,7 +28,7 @@ public class DepartmentTablePanel extends AbstractTablePanel<Department> {
 	}
 
 	@Override
-	protected Department getItems() {
+	protected Department getItem() {
 		int row = table.getSelectedRow();
 		
 		return new Department(

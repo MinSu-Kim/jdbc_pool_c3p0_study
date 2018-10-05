@@ -31,7 +31,7 @@ public class EmployeeTablePanel extends AbstractTablePanel<Employee> {
 	}
 
 	@Override
-	protected Employee getItems() {
+	protected Employee getItem() {
 		int row = table.getSelectedRow();
 
 		return new Employee(String.valueOf(table.getValueAt(row, 0)));

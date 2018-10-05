@@ -21,10 +21,6 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 	protected Object[] colNames;
 	protected List<T> items;
 
-	public void setItems(List<T> items) {
-		this.items = items;
-	}
-
 	public AbstractTablePanel(String title) {
 		initComponents(title);
 		setColumnNames();
@@ -47,6 +43,10 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		table.setComponentPopupMenu(popUpMenu);
 	}
 
+	public void setItems(List<T> items) {
+		this.items = items;
+	}
+	
 	protected void tableCellAlignment(int align, int... idx) {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(align);
@@ -68,17 +68,9 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		return table.getValueAt(table.getSelectedRow(), 0);
 	}
 
-	public void loadData() {
-		model = new NonEditableModel(toArray(), colNames);
-		table.setModel(model);
-		setAlignWith();
-	}
-
 	public JTable getTable() {
 		return table;
 	}
-
-	protected abstract void setAlignWith();
 
 	protected void updateRow(T item) {
 		items.set(items.indexOf(item), item);
@@ -91,11 +83,17 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 	}
 	
 	public void removeRow() {
-		items.remove(getItems());
+		items.remove(getItem());
 		loadData();
 	}
 	
-	protected abstract T getItems();
+	protected abstract T getItem();
+	
+	public void loadData() {
+		model = new NonEditableModel(toArray(), colNames);
+		table.setModel(model);
+		setAlignWith();
+	}
 	
 	protected Object[][] toArray() {
 		Object[][] results = new Object[items.size()][];
@@ -104,10 +102,6 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		}
 		return results;
 	}
-
-	protected abstract Object[] toArray(T item);
-
-	protected abstract void setColumnNames();
 
 	protected class NonEditableModel extends DefaultTableModel {
 
@@ -120,4 +114,11 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 			return false;
 		}
 	}
+
+	protected abstract Object[] toArray(T item);
+	
+	protected abstract void setAlignWith();
+	
+	protected abstract void setColumnNames();
+
 }

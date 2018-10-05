@@ -27,7 +27,7 @@ public class TitleTablePanel extends AbstractTablePanel<Title>{
 	}
 
 	@Override
-	protected Title getItems() {
+	protected Title getItem() {
 		int row = table.getSelectedRow();
 		return new Title(String.valueOf(table.getValueAt(row, 0)));
 	}
