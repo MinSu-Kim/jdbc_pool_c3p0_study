@@ -16,6 +16,10 @@ public class Employee {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Employee(String empNo) {
+		this.empNo = empNo;
+	}
+
 	public Employee(String empNo, String empName, Title title, int salary, boolean gender, String hobby,
 			Department dept, Date joinDate) {
 		this.empNo = empNo;
@@ -94,11 +98,33 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return String.format(
-				"Employee [%s, %s, %s, %s, %s, %s, %s, %s]",
-				empNo, empName, title.getCode(), salary, gender?"여":"남", hobby, dept.getDeptNo(), joinDate);
+		return String.format("Employee [%s, %s, %s, %s, %s, %s, %s, %s]", empNo, empName, title.getCode(), salary,
+				gender ? "여" : "남", hobby, dept.getDeptNo(), joinDate);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((empNo == null) ? 0 : empNo.hashCode());
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (empNo == null) {
+			if (other.empNo != null)
+				return false;
+		} else if (!empNo.equals(other.empNo))
+			return false;
+		return true;
+	}
 
 }

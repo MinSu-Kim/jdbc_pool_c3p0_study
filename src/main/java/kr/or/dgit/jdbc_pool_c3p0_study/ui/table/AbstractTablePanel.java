@@ -19,6 +19,11 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 	protected NonEditableModel model;
 	protected int selectRowIndex;
 	protected Object[] colNames;
+	protected List<T> items;
+
+	public void setItems(List<T> items) {
+		this.items = items;
+	}
 
 	public AbstractTablePanel(String title) {
 		initComponents(title);
@@ -63,13 +68,8 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		return table.getValueAt(table.getSelectedRow(), 0);
 	}
 
-	public void removeRow() {
-		model.removeRow(table.getSelectedRow());
-	}
-
-	public void loadData(List<T> items) {
-		Object[][] datas = toArray(items);
-		model = new NonEditableModel(datas, colNames);
+	public void loadData() {
+		model = new NonEditableModel(toArray(), colNames);
 		table.setModel(model);
 		setAlignWith();
 	}
@@ -81,29 +81,32 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 	protected abstract void setAlignWith();
 
 	protected void updateRow(T item) {
-		int row = table.getSelectedRow();
-		Object[] data = toArray(item);
-		int colSize = model.getColumnCount();
+		items.set(items.indexOf(item), item);
+		loadData();
+	}
 
-		for (int column = 0; column < colSize; column++) {
-			model.setValueAt(data[column], row, column);
-		}
-	}
-	
 	protected void addRow(T item) {
-		model.addRow(toArray(item));
+		items.add(item);
+		loadData();
 	}
 	
-	protected Object[][] toArray(List<T> items){
+	public void removeRow() {
+		items.remove(getItems());
+		loadData();
+	}
+	
+	protected abstract T getItems();
+	
+	protected Object[][] toArray() {
 		Object[][] results = new Object[items.size()][];
-		for(int i=0; i< items.size(); i++) {
+		for (int i = 0; i < items.size(); i++) {
 			results[i] = toArray(items.get(i));
 		}
 		return results;
 	}
-	
+
 	protected abstract Object[] toArray(T item);
-	
+
 	protected abstract void setColumnNames();
 
 	protected class NonEditableModel extends DefaultTableModel {

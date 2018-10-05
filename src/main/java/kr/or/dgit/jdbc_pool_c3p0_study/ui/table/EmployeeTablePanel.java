@@ -15,25 +15,26 @@ public class EmployeeTablePanel extends AbstractTablePanel<Employee> {
 	protected void setAlignWith() {
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 4, 5, 6, 7);
 		tableCellAlignment(SwingConstants.RIGHT, 3);
-        tableSetWidth(100, 200, 100, 150, 50, 100, 100, 150);   		
+		tableSetWidth(100, 200, 100, 150, 50, 100, 100, 150);
 	}
 
 	@Override
 	protected Object[] toArray(Employee item) {
-		return new Object[] {
-				item.getEmpNo(), 
-				item.getEmpName(), 
-				item.getTitle().getCode(), 
-				String.format("%,d", item.getSalary()), 
-				item.isGender()?"남":"여", 
-				item.getHobby(), 
-				item.getDept().getDeptNo(), 
-				item.getJoinDate()};
+		return new Object[] { item.getEmpNo(), item.getEmpName(), item.getTitle().getCode(),
+				String.format("%,d", item.getSalary()), item.isGender() ? "남" : "여", item.getHobby(),
+				item.getDept().getDeptNo(), item.getJoinDate() };
 	}
 
 	@Override
 	protected void setColumnNames() {
-		colNames = new String[] { "사원번호", "사원명", "직책", "급여", "성별", "취미", "부서", "입사일"};     		
+		colNames = new String[] { "사원번호", "사원명", "직책", "급여", "성별", "취미", "부서", "입사일" };
+	}
+
+	@Override
+	protected Employee getItems() {
+		int row = table.getSelectedRow();
+
+		return new Employee(String.valueOf(table.getValueAt(row, 0)));
 	}
 
 }

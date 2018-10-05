@@ -34,18 +34,21 @@ public class ErpMain extends JFrame {
 		
         AbstractTablePanel<Title> titleTable = new TitleTablePanel();
         titleService = new TitleService();
-        titleTable.loadData(titleService.findTitleByAll());
+        titleTable.setItems(titleService.findTitleByAll());
+        titleTable.loadData();
         contentPane.add(titleTable);
         
         AbstractTablePanel<Department> departmentTable = new DepartmentTablePanel();
         departmentService = new DepartmentService();
-        departmentTable.loadData(departmentService.findDepartmentByAll());
+        departmentTable.setItems(departmentService.findDepartmentByAll());
+        departmentTable.loadData();
         contentPane.add(departmentTable);
         
         
         AbstractTablePanel<Employee> employeeTable = new EmployeeTablePanel();
         employeeService = new EmployeeService();
-        employeeTable.loadData(employeeService.findEmployeeByAll());
+        employeeTable.setItems(employeeService.findEmployeeByAll());
+        employeeTable.loadData();
         contentPane.add(employeeTable);
 	}
 

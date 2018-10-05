@@ -27,4 +27,13 @@ public class DepartmentTablePanel extends AbstractTablePanel<Department> {
 		return new Object[] {item.getDeptNo(), item.getDeptName(), item.getFloor()};
 	}
 
+	@Override
+	protected Department getItems() {
+		int row = table.getSelectedRow();
+		
+		return new Department(
+				String.valueOf(model.getValueAt(row, 0)));
+
+	}
+
 }

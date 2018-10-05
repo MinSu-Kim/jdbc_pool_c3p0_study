@@ -26,4 +26,10 @@ public class TitleTablePanel extends AbstractTablePanel<Title>{
 		return new Object[] {title.getCode(), title.getName()};
 	}
 
+	@Override
+	protected Title getItems() {
+		int row = table.getSelectedRow();
+		return new Title(String.valueOf(table.getValueAt(row, 0)));
+	}
+
 }
