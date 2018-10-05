@@ -32,8 +32,7 @@ public class DepartmentTablePanel extends AbstractTablePanel<Department> {
 		int row = table.getSelectedRow();
 		
 		return new Department(
-				String.valueOf(model.getValueAt(row, 0)));
-
+				String.valueOf(table.getValueAt(row, 0)));
 	}
 
 }

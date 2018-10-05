@@ -16,7 +16,6 @@ import javax.swing.table.TableColumnModel;
 @SuppressWarnings("serial")
 public abstract class AbstractTablePanel<T> extends JPanel {
 	protected JTable table;
-	protected NonEditableModel model;
 	protected int selectRowIndex;
 	protected Object[] colNames;
 	protected List<T> items;
@@ -37,10 +36,6 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		scrollPane.setViewportView(table);
-	}
-
-	public void setPopupMenu(JPopupMenu popUpMenu) {
-		table.setComponentPopupMenu(popUpMenu);
 	}
 
 	public void setItems(List<T> items) {
@@ -68,10 +63,6 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		return table.getValueAt(table.getSelectedRow(), 0);
 	}
 
-	public JTable getTable() {
-		return table;
-	}
-
 	protected void updateRow(T item) {
 		items.set(items.indexOf(item), item);
 		loadData();
@@ -87,22 +78,20 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		loadData();
 	}
 	
-	protected abstract T getItem();
-	
 	public void loadData() {
-		model = new NonEditableModel(toArray(), colNames);
-		table.setModel(model);
+		Object[][] rows = new Object[items.size()][];
+		for (int i = 0; i < items.size(); i++) {
+			rows[i] = toArray(items.get(i));
+		}
+		
+		table.setModel(new NonEditableModel(rows, colNames));
 		setAlignWith();
 	}
 	
-	protected Object[][] toArray() {
-		Object[][] results = new Object[items.size()][];
-		for (int i = 0; i < items.size(); i++) {
-			results[i] = toArray(items.get(i));
-		}
-		return results;
+	public void setPopUpMenu(JPopupMenu popUpMenu) {
+		table.setComponentPopupMenu(popUpMenu);
 	}
-
+	
 	protected class NonEditableModel extends DefaultTableModel {
 
 		public NonEditableModel(Object[][] data, Object[] columnNames) {
@@ -115,6 +104,8 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		}
 	}
 
+	protected abstract T getItem();
+	
 	protected abstract Object[] toArray(T item);
 	
 	protected abstract void setAlignWith();

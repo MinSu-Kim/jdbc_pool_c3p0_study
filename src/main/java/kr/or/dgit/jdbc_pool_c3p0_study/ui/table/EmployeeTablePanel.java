@@ -6,7 +6,7 @@ import kr.or.dgit.jdbc_pool_c3p0_study.domain.Employee;
 
 @SuppressWarnings("serial")
 public class EmployeeTablePanel extends AbstractTablePanel<Employee> {
-
+	
 	public EmployeeTablePanel() {
 		super("사원");
 	}
@@ -33,7 +33,6 @@ public class EmployeeTablePanel extends AbstractTablePanel<Employee> {
 	@Override
 	protected Employee getItem() {
 		int row = table.getSelectedRow();
-
 		return new Employee(String.valueOf(table.getValueAt(row, 0)));
 	}
 
