@@ -11,10 +11,16 @@ import javax.sql.DataSource;
 
 import com.mchange.v2.c3p0.DataSources;
 
-public class DataBase {
+public class MyDataSource{
+	public static final MyDataSource instance = new MyDataSource();
+
+	public static MyDataSource getInstance() {
+		return instance;
+	}
+
 	private DataSource dataSource;
 
-	public DataBase() {
+	private MyDataSource() {
 		Properties prop = loadProperties();
 
 		try {
@@ -29,7 +35,7 @@ public class DataBase {
 		}
 	}
 
-	public Properties loadProperties() {
+	private Properties loadProperties() {
 		Properties properties = new Properties();
 		try (InputStream is = ClassLoader.getSystemResourceAsStream("DBCon.props")) {
 			properties.load(is);
@@ -43,6 +49,7 @@ public class DataBase {
 		return dataSource;
 	}
 
+	
 	public void close() {
 		try {
 			DataSources.destroy(dataSource);
@@ -50,4 +57,5 @@ public class DataBase {
 			e.printStackTrace();
 		}
 	}
+	
 }

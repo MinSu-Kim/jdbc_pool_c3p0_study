@@ -8,29 +8,23 @@ import com.mchange.v2.c3p0.DataSources;
 
 public class DataBaseFactory {
 	private static final DataBaseFactory instance = new DataBaseFactory();
-	
+
 	public static DataBaseFactory getInstance() {
 		return instance;
 	}
 
 	private DataBase db;
-	private DataSource ds;
-	
+
 	private DataBaseFactory() {
 		db = new DataBase();
-		ds = db.getDataSource();
 	}
 
 	public DataSource getDataSource() {
-		return ds;
+		return db.getDataSource();
 	}
-	
+
 	public void close() {
-		try {
-			DataSources.destroy(ds);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		db.close();
 	}
 
 }

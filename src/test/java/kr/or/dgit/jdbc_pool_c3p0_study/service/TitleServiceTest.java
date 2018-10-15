@@ -31,7 +31,7 @@ public class TitleServiceTest {
 	}
 
 	@Test
-	public void testTitleByAll() throws SQLException {
+	public void test0TitleByAll() throws SQLException {
 		List<Title> list = service.findTitleByAll();
 		Assert.assertNotNull(list);
 		for (Title t : list) {
@@ -41,7 +41,7 @@ public class TitleServiceTest {
 	}
 
 	@Test
-	public void testTitleByCode() throws SQLException {
+	public void test1TitleByCode() throws SQLException {
 		Title searchTitle = new Title();
 		searchTitle.setCode("T001");
 		Title title = service.findTitleByCode(searchTitle);
@@ -50,22 +50,22 @@ public class TitleServiceTest {
 	}
 
 	@Test
-	public void testRegisterTitle() throws SQLException {
-		Title insertTitle = new Title("T002", "부장");
+	public void test2RegisterTitle() throws SQLException {
+		Title insertTitle = new Title("T005", "사원");
 		int res = service.registTitle(insertTitle);
 		log.trace("result : " + res);
 		Assert.assertEquals(1, res);
 	}
 
 	@Test
-	public void testUnRegisterTitle() throws SQLException {
-		int res = service.unRegisterTitle("T002");
+	public void test4UnRegisterTitle() throws SQLException {
+		int res = service.unRegisterTitle("T005");
 		log.trace("result : " + res);
 		Assert.assertEquals(1, res);
 	}
 
 	@Test
-	public void testUpdateTitle() throws SQLException {
+	public void test3UpdateTitle() throws SQLException {
 		Title title = new Title("T005", "평사원");
 		int res = service.updateTitle(title);
 		log.trace("result : " + res);

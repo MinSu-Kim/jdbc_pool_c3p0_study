@@ -7,24 +7,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import kr.or.dgit.jdbc_pool_c3p0_study.domain.Title;
-import kr.or.dgit.jdbc_pool_c3p0_study.jdbc.DataBaseFactory;
+import kr.or.dgit.jdbc_pool_c3p0_study.jdbc.ConnectionProvider;
 import kr.or.dgit.jdbc_pool_c3p0_study.jdbc.JdbcUtil;
 
 public class TitleDaoImpl implements TitleDao {
-	private DataSource ds;
+/*	private DataSource ds;
 
 	public TitleDaoImpl() {
-		ds = DataBaseFactory.getInstance().getDataSource();
-	}
+		ds = DataSourceProvider.getDataSource();
+	}*/
 
 	@Override
 	public List<Title> selectTitleByAll() {
 		String sql = "select code, name from title";
 		List<Title> list = new ArrayList<>();
-		try (Connection con = ds.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs.next()) {
@@ -40,7 +38,7 @@ public class TitleDaoImpl implements TitleDao {
 	public Title selectTitleByCode(Title title) {
 		String sql = "select code, name from title where code=?";
 		Title res = null;
-		try (Connection con = ds.getConnection(); 
+		try (Connection con = ConnectionProvider.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, title.getCode());
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -62,7 +60,7 @@ public class TitleDaoImpl implements TitleDao {
 	public int insertTitle(Title title) {
 		String sql = "insert into title values(?, ?)";
 		int res = -1;
-		try (Connection con = ds.getConnection()) {
+		try (Connection con = ConnectionProvider.getConnection()) {
 			try (PreparedStatement pstmt = con.prepareStatement(sql)) {
 				con.setAutoCommit(false);
 				pstmt.setString(1, title.getCode());
@@ -84,7 +82,7 @@ public class TitleDaoImpl implements TitleDao {
 	public int deleteTitle(String code) {
 		String sql = "delete from title where code = ?";
 		int res = -1;
-		try (Connection con = ds.getConnection(); 
+		try (Connection con = ConnectionProvider.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, code);
 			res = pstmt.executeUpdate();
@@ -99,7 +97,7 @@ public class TitleDaoImpl implements TitleDao {
 		//code, name
 		String sql = "update title set name=? where code = ?";
 		int res = -1;
-		try (Connection con = ds.getConnection(); 
+		try (Connection con = ConnectionProvider.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, title.getName());
 			pstmt.setString(2, title.getCode());

@@ -14,7 +14,10 @@ import org.junit.Test;
 
 import com.mchange.v2.c3p0.PooledDataSource;
 
+import kr.or.dgit.jdbc_pool_c3p0_study.jdbc.DataSourceProvider;
+import kr.or.dgit.jdbc_pool_c3p0_study.jdbc.ConnectionProvider;
 import kr.or.dgit.jdbc_pool_c3p0_study.jdbc.DataBaseFactory;
+import kr.or.dgit.jdbc_pool_c3p0_study.jdbc.MyDataSource;
 
 public class DBConnectionTest {
 	static final Logger log = LogManager.getLogger();
@@ -23,19 +26,38 @@ public class DBConnectionTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		log.trace("setUpBeforeClass()");
-		ds = DataBaseFactory.getInstance().getDataSource();
+		ds = DataSourceProvider.getDataSource();
 		printDriverStats();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		log.trace("tearDownAfterClass()");
-		printDriverStats();
+//		MyDataSource.getInstance().close(); //주석처리 하지 않으면 다른 테스트 에러발생
+//		printDriverStats();
 	}
 
-	@Test
+/*	@Test
 	public void testPool() throws SQLException {
 		log.trace("testPool()");
+		Connection[] connections = new Connection[10];
+		for(int i=0; i<10; i++) {
+			
+			connections[i] = ds.getConnection();
+			Assert.assertNotNull(connections[i]);
+			printDriverStats();
+		}
+				
+		for(int i=0; i<10; i++) {
+			connections[i].close();
+			printDriverStats();
+		}
+		
+	}*/
+
+/*	@Test
+	public void test2Pool() throws SQLException {
+		log.trace("test2Pool()");
 		Connection[] connections = new Connection[10];
 		for(int i=0; i<10; i++) {
 			connections[i] = ds.getConnection();
@@ -48,8 +70,26 @@ public class DBConnectionTest {
 			printDriverStats();
 		}
 		
+	}*/
+	
+	@Test
+	public void testConnection() throws SQLException {
+		log.trace("testConnection()");
+		Connection[] connections = new Connection[10];
+		for(int i=0; i<10; i++) {
+			connections[i] = ConnectionProvider.getConnection();
+			Assert.assertNotNull(connections[i]);
+			printDriverStats();
+		}
+				
+		for(int i=0; i<10; i++) {
+			connections[i].close();
+			printDriverStats();
+		}
+		
 	}
-
+	
+	
 	public static void printDriverStats() {
 		PooledDataSource pds = (PooledDataSource) ds;
 		try {
