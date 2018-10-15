@@ -31,16 +31,15 @@ public class DBConnectionTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		log.trace("tearDownAfterClass()");
-//		MyDataSource.getInstance().close(); //주석처리 하지 않으면 다른 테스트 에러발생
-//		printDriverStats();
+//		MyDataSource.getInstance().close(); // 주석처리 하지 않으면 다른 테스트 에러발생
+//		printDriverStats();					// close(); 테스트 되는지 
 	}
 
-/*	@Test
+	@Test
 	public void testPool() throws SQLException {
 		log.trace("testPool()");
 		Connection[] connections = new Connection[10];
 		for(int i=0; i<10; i++) {
-			
 			connections[i] = ds.getConnection();
 			Assert.assertNotNull(connections[i]);
 			printDriverStats();
@@ -51,24 +50,7 @@ public class DBConnectionTest {
 			printDriverStats();
 		}
 		
-	}*/
-
-/*	@Test
-	public void test2Pool() throws SQLException {
-		log.trace("test2Pool()");
-		Connection[] connections = new Connection[10];
-		for(int i=0; i<10; i++) {
-			connections[i] = ds.getConnection();
-			Assert.assertNotNull(connections[i]);
-			printDriverStats();
-		}
-				
-		for(int i=0; i<10; i++) {
-			connections[i].close();
-			printDriverStats();
-		}
-		
-	}*/
+	}
 	
 	@Test
 	public void testConnection() throws SQLException {
