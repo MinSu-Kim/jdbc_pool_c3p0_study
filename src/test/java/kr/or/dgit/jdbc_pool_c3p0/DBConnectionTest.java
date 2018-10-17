@@ -38,6 +38,7 @@ public class DBConnectionTest {
 	@Test
 	public void testPool() throws SQLException {
 		log.trace("testPool()");
+		DataSource ds = DataSourceProvider.getDataSource();
 		Connection[] connections = new Connection[10];
 		for(int i=0; i<10; i++) {
 			connections[i] = ds.getConnection();
@@ -68,7 +69,6 @@ public class DBConnectionTest {
 		}
 		
 	}
-	
 	
 	public static void printDriverStats() {
 		PooledDataSource pds = (PooledDataSource) ds;
