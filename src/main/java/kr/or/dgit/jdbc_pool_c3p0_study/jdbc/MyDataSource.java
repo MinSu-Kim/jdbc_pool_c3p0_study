@@ -37,7 +37,7 @@ public class MyDataSource{
 
 	private Properties loadProperties() {
 		Properties properties = new Properties();
-		try (InputStream is = ClassLoader.getSystemResourceAsStream("DBCon.props")) {
+		try (InputStream is = ClassLoader.getSystemResourceAsStream("db.properties")) {
 			properties.load(is);
 		} catch (IOException e) {
 			e.printStackTrace();
