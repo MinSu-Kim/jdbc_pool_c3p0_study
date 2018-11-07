@@ -61,17 +61,24 @@ public class ErpMain extends JFrame {
 		JMenuItem delItem = new JMenuItem("삭제");
 		delItem.addActionListener(e->{
 			try {
-				employeeService.unRegisterEmployee((String) employeeTable.getSelectedNo());
+				employeeService.unRegisterEmployee(employeeTable.getItem().getEmpNo());
 				employeeTable.removeRow();
 			} catch (RuntimeException e1) {
 				JOptionPane.showMessageDialog(null, "해당 제품이 판매현황에 존재합니다.");
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
 			}
 		});
 		
 		JMenuItem updateItem = new JMenuItem("수정");
 		updateItem.addActionListener(e->{
-			Employee employee = employeeService.findEmployeeByCode((String) employeeTable.getSelectedNo());
-			JOptionPane.showMessageDialog(null, employee);	
+			Employee employee;
+			try {
+				employee = employeeService.findEmployeeByCode( employeeTable.getItem().getEmpNo());
+				JOptionPane.showMessageDialog(null, employee);	
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			}
 		});
 		
 		JPopupMenu popUpMenu = new JPopupMenu();

@@ -14,8 +14,8 @@ import org.junit.Test;
 
 import com.mchange.v2.c3p0.PooledDataSource;
 
-import kr.or.dgit.jdbc_pool_c3p0.jdbc.ConnectionProvider;
 import kr.or.dgit.jdbc_pool_c3p0.jdbc.DataSourceProvider;
+import kr.or.dgit.jdbc_pool_c3p0.jdbc.MyDataSource;
 
 public class DBConnectionTest {
 	static final Logger log = LogManager.getLogger();
@@ -32,7 +32,7 @@ public class DBConnectionTest {
 	public static void tearDownAfterClass() throws Exception {
 		log.trace("tearDownAfterClass()");
 //		MyDataSource.getInstance().close(); // 주석처리 하지 않으면 다른 테스트 에러발생
-//		printDriverStats();					// close(); 테스트 되는지 
+		printDriverStats();					// close(); 테스트 되는지 
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class DBConnectionTest {
 		log.trace("testConnection()");
 		Connection[] connections = new Connection[10];
 		for(int i=0; i<10; i++) {
-			connections[i] = ConnectionProvider.getConnection();
+			connections[i] = ds.getConnection();
 			Assert.assertNotNull(connections[i]);
 			printDriverStats();
 		}

@@ -19,6 +19,7 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 	protected int selectRowIndex;
 	protected Object[] colNames;
 	protected List<T> items;
+	private JScrollPane scrollPane;
 
 	public AbstractTablePanel(String title) {
 		initComponents(title);
@@ -29,7 +30,7 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		setBorder(new TitledBorder(null, title, TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new BorderLayout(0, 0));
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 
 		table = new JTable();
@@ -59,10 +60,6 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		}
 	}
 
-	public Object getSelectedNo() {
-		return table.getValueAt(table.getSelectedRow(), 0);
-	}
-
 	protected void updateRow(T item) {
 		items.set(items.indexOf(item), item);
 		loadData();
@@ -73,7 +70,7 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		loadData();
 	}
 	
-	public void removeRow() {
+	public void removeRow() throws Exception {
 		items.remove(getItem());
 		loadData();
 	}
@@ -89,6 +86,7 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 	}
 	
 	public void setPopUpMenu(JPopupMenu popUpMenu) {
+		scrollPane.setComponentPopupMenu(popUpMenu);
 		table.setComponentPopupMenu(popUpMenu);
 	}
 	
@@ -104,7 +102,13 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		}
 	}
 
-	protected abstract T getItem();
+	public int getSelectedRowIndex() throws Exception {
+		int row = table.getSelectedRow();
+		if (row==-1) throw new Exception("해당 항목을 선택하세요");
+		return row;
+	}
+	
+	public abstract T getItem() throws Exception;
 	
 	protected abstract Object[] toArray(T item);
 	

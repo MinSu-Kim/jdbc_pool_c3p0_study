@@ -7,24 +7,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import kr.or.dgit.jdbc_pool_c3p0.domain.Department;
 import kr.or.dgit.jdbc_pool_c3p0.domain.Employee;
 import kr.or.dgit.jdbc_pool_c3p0.domain.Title;
-import kr.or.dgit.jdbc_pool_c3p0.jdbc.ConnectionProvider;
+import kr.or.dgit.jdbc_pool_c3p0.jdbc.DataSourceProvider;
 
 public class EmployeeDaoImpl implements EmployeeDao {
-/*	private DataSource ds;
+	private DataSource ds;
 
 	public EmployeeDaoImpl() {
 		ds = DataSourceProvider.getDataSource();
-	}*/
+	}
 
 	@Override
 	public List<Employee> selectEmployeeByAll() {
 		String sql = "select empno, empname, title, salary, gender, hobby, dept, joinDate from Employee";
 		List<Employee> list = new ArrayList<>();
 
-		try (Connection connection = ConnectionProvider.getConnection();
+		try (Connection connection = ds.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs.next()) {
@@ -41,7 +43,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		String sql = "select empno, empname, title, salary, gender, hobby, dept, joinDate from Employee where empno = ?";
 		Employee employee = null;
 
-		try (Connection connection = ConnectionProvider.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql);) {
+		try (Connection connection = ds.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			pstmt.setString(1, empNo);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
@@ -64,7 +66,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public int insertEmployee(Employee emp) {
 		String sql = "INSERT INTO employee VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		int res = -1;
-		try (Connection connection = ConnectionProvider.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
+		try (Connection connection = ds.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			pstmt.setString(1, emp.getEmpNo());
 			pstmt.setString(2, emp.getEmpName());
 			pstmt.setString(3, emp.getTitle().getCode());
@@ -84,11 +86,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public int deleteEmployee(String empNo) {
 		String sql = "delete from employee where empno =?";
 		int res = -1;
-		try (Connection connection = ConnectionProvider.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
+		try (Connection connection = ds.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			pstmt.setString(1, empNo);
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.printf("Error Code : %d%nSQL STATE : %s%nMessage : %s%n", e.getErrorCode(), e.getSQLState(), e.getMessage());
 		}
 		return res;
 	}
@@ -98,7 +101,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		String sql = "UPDATE employee " + "SET empname=?, title=?, salary=?, gender=?, hobby=?, dept=?, joinDate=? "
 				+ "WHERE empno=?";
 		int res = -1;
-		try (Connection connection = ConnectionProvider.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
+		try (Connection connection = ds.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			pstmt.setString(1, emp.getEmpName());
 			pstmt.setString(2, emp.getTitle().getCode());
 			pstmt.setInt(3, emp.getSalary());

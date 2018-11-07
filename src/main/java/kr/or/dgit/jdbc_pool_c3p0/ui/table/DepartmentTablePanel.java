@@ -28,11 +28,9 @@ public class DepartmentTablePanel extends AbstractTablePanel<Department> {
 	}
 
 	@Override
-	protected Department getItem() {
-		int row = table.getSelectedRow();
-		
-		return new Department(
-				String.valueOf(table.getValueAt(row, 0)));
+	public Department getItem() throws Exception {
+		int row = getSelectedRowIndex();
+		return new Department(String.valueOf(table.getValueAt(row, 0)));
 	}
 
 }

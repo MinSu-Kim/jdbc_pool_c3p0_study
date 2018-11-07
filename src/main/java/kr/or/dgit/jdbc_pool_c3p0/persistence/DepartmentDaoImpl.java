@@ -7,22 +7,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import kr.or.dgit.jdbc_pool_c3p0.domain.Department;
-import kr.or.dgit.jdbc_pool_c3p0.jdbc.ConnectionProvider;
+import kr.or.dgit.jdbc_pool_c3p0.jdbc.DataSourceProvider;
 
 public class DepartmentDaoImpl implements DepartmentDao {
-/*	private DataSource ds;
+	private DataSource ds;
 
 	public DepartmentDaoImpl() {
 		ds = DataSourceProvider.getDataSource();
-	}*/
+	}
 
 	@Override
 	public List<Department> selectDepartmentByAll() {
 		String sql = "select deptno, deptname, floor from department";
 		List<Department> list = new ArrayList<>();
 
-		try (Connection connection = ConnectionProvider.getConnection();
+		try (Connection connection = ds.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs.next()) {
@@ -43,7 +45,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		String sql = "select deptno, deptname, floor from department where deptno = ?";
 		Department dept = null;
 
-		try (Connection connection = ConnectionProvider.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql);) {
+		try (Connection connection = ds.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			pstmt.setString(1, deptNo);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
@@ -61,7 +63,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	public int insertDepartment(Department department) {
 		String sql = "insert into Department values(?, ?, ?)";
 		int res = -1;
-		try (Connection connection = ConnectionProvider.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql);) {
+		try (Connection connection = ds.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			pstmt.setString(1, department.getDeptNo());
 			pstmt.setString(2, department.getDeptName());
 			pstmt.setInt(3, department.getFloor());
@@ -76,7 +78,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	public int deleteDepartment(String deptNo) {
 		String sql = "delete from department where deptno = ?";
 		int res = -1;
-		try (Connection connection = ConnectionProvider.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql);) {
+		try (Connection connection = ds.getConnection(); PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			pstmt.setString(1, deptNo);
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -89,7 +91,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	public int updateDepartment(Department department) {
 		String sql = "update department set deptname=?, floor=? where deptno = ?";
 		int res = -1;
-		try (Connection connection = ConnectionProvider.getConnection(); 
+		try (Connection connection = ds.getConnection(); 
 				PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			pstmt.setString(1, department.getDeptName());
 			pstmt.setInt(2, department.getFloor());
