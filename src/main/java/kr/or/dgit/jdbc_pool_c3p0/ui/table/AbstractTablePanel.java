@@ -60,12 +60,12 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		}
 	}
 
-	protected void updateRow(T item) {
+	public void updateRow(T item) {
 		items.set(items.indexOf(item), item);
 		loadData();
 	}
 
-	protected void addRow(T item) {
+	public void addRow(T item) {
 		items.add(item);
 		loadData();
 	}
@@ -85,7 +85,7 @@ public abstract class AbstractTablePanel<T> extends JPanel {
 		setAlignWith();
 	}
 	
-	public void setPopUpMenu(JPopupMenu popUpMenu) {
+	public void setPopupMenu(JPopupMenu popUpMenu) {
 		scrollPane.setComponentPopupMenu(popUpMenu);
 		table.setComponentPopupMenu(popUpMenu);
 	}

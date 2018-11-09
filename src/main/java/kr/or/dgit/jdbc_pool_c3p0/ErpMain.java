@@ -52,7 +52,7 @@ public class ErpMain extends JFrame {
         employeeService = new EmployeeService();
         employeeTable.setItems(employeeService.findEmployeeByAll());
         employeeTable.loadData();
-        employeeTable.setPopUpMenu(getEmpPopUpMenu());
+        employeeTable.setPopupMenu(getEmpPopUpMenu());
         contentPane.add(employeeTable);
 
 	}
