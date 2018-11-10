@@ -10,6 +10,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import kr.or.dgit.jdbc_pool_c3p0.domain.Department;
+import kr.or.dgit.jdbc_pool_c3p0.jdbc.ConnectionProvider;
 import kr.or.dgit.jdbc_pool_c3p0.jdbc.DataSourceProvider;
 
 public class DepartmentDaoImpl implements DepartmentDao {
@@ -24,7 +25,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		String sql = "select deptno, deptname, floor from department";
 		List<Department> list = new ArrayList<>();
 
-		try (Connection connection = ds.getConnection();
+		try (Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
 			while (rs.next()) {

@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import com.mchange.v2.c3p0.PooledDataSource;
 
+import kr.or.dgit.jdbc_pool_c3p0.jdbc.ConnectionProvider;
 import kr.or.dgit.jdbc_pool_c3p0.jdbc.DataSourceProvider;
 
 public class DBConnectionTest {
@@ -67,6 +68,14 @@ public class DBConnectionTest {
 			printDriverStats();
 		}
 		
+	}
+	
+	@Test
+	public void testConnectionProvider() throws SQLException {
+		try(Connection con = ConnectionProvider.getConnection()){
+			log.trace(con);
+			Assert.assertNotNull(con);
+		}
 	}
 	
 	public static void printDriverStats() {
