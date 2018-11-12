@@ -1,4 +1,4 @@
-package kr.or.dgit.jdbc_pool_c3p0;
+package jdbc_pool_c3p0;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -8,16 +8,16 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
-import kr.or.dgit.jdbc_pool_c3p0.domain.Department;
-import kr.or.dgit.jdbc_pool_c3p0.domain.Employee;
-import kr.or.dgit.jdbc_pool_c3p0.domain.Title;
-import kr.or.dgit.jdbc_pool_c3p0.service.DepartmentService;
-import kr.or.dgit.jdbc_pool_c3p0.service.EmployeeService;
-import kr.or.dgit.jdbc_pool_c3p0.service.TitleService;
-import kr.or.dgit.jdbc_pool_c3p0.ui.table.AbstractTablePanel;
-import kr.or.dgit.jdbc_pool_c3p0.ui.table.DepartmentTablePanel;
-import kr.or.dgit.jdbc_pool_c3p0.ui.table.EmployeeTablePanel;
-import kr.or.dgit.jdbc_pool_c3p0.ui.table.TitleTablePanel;
+import jdbc_pool_c3p0.domain.Department;
+import jdbc_pool_c3p0.domain.Employee;
+import jdbc_pool_c3p0.domain.Title;
+import jdbc_pool_c3p0.service.DepartmentService;
+import jdbc_pool_c3p0.service.EmployeeService;
+import jdbc_pool_c3p0.service.TitleService;
+import jdbc_pool_c3p0.ui.table.AbstractTablePanel;
+import jdbc_pool_c3p0.ui.table.DepartmentTablePanel;
+import jdbc_pool_c3p0.ui.table.EmployeeTablePanel;
+import jdbc_pool_c3p0.ui.table.TitleTablePanel;
 
 @SuppressWarnings("serial")
 public class ErpMain extends JFrame {

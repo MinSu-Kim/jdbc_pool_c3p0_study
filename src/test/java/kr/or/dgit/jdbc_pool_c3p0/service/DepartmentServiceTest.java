@@ -10,8 +10,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import kr.or.dgit.jdbc_pool_c3p0.domain.Department;
-import kr.or.dgit.jdbc_pool_c3p0.service.DepartmentService;
+import jdbc_pool_c3p0.domain.Department;
+import jdbc_pool_c3p0.service.DepartmentService;
 
 public class DepartmentServiceTest {
 	static final Logger log = LogManager.getLogger();

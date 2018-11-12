@@ -11,10 +11,10 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import kr.or.dgit.jdbc_pool_c3p0.domain.Department;
-import kr.or.dgit.jdbc_pool_c3p0.domain.Employee;
-import kr.or.dgit.jdbc_pool_c3p0.domain.Title;
-import kr.or.dgit.jdbc_pool_c3p0.service.EmployeeService;
+import jdbc_pool_c3p0.domain.Department;
+import jdbc_pool_c3p0.domain.Employee;
+import jdbc_pool_c3p0.domain.Title;
+import jdbc_pool_c3p0.service.EmployeeService;
 
 public class EmployeeServiceTest {
 	static final Logger log = LogManager.getLogger();

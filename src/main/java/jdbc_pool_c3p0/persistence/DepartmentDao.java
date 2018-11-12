@@ -1,8 +1,8 @@
-package kr.or.dgit.jdbc_pool_c3p0.persistence;
+package jdbc_pool_c3p0.persistence;
 
 import java.util.List;
 
-import kr.or.dgit.jdbc_pool_c3p0.domain.Department;
+import jdbc_pool_c3p0.domain.Department;
 
 public interface DepartmentDao {
 	List<Department> selectDepartmentByAll();

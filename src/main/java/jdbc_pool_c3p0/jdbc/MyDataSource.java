@@ -1,4 +1,4 @@
-package kr.or.dgit.jdbc_pool_c3p0.jdbc;
+package jdbc_pool_c3p0.jdbc;
 
 import java.io.IOException;
 import java.io.InputStream;

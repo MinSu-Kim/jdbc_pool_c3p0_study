@@ -1,4 +1,4 @@
-package kr.or.dgit.jdbc_pool_c3p0.ui.table;
+package jdbc_pool_c3p0.ui.table;
 
 import java.awt.BorderLayout;
 import java.util.List;

@@ -12,8 +12,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import kr.or.dgit.jdbc_pool_c3p0.domain.Title;
-import kr.or.dgit.jdbc_pool_c3p0.service.TitleService;
+import jdbc_pool_c3p0.domain.Title;
+import jdbc_pool_c3p0.service.TitleService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TitleServiceTest {

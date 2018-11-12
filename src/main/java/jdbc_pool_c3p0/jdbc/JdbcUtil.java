@@ -1,4 +1,4 @@
-package kr.or.dgit.jdbc_pool_c3p0.jdbc;
+package jdbc_pool_c3p0.jdbc;
 
 import java.sql.Connection;
 import java.sql.SQLException;

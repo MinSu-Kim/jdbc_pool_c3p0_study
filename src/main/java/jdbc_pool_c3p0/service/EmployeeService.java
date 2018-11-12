@@ -1,10 +1,10 @@
-package kr.or.dgit.jdbc_pool_c3p0.service;
+package jdbc_pool_c3p0.service;
 
 import java.util.List;
 
-import kr.or.dgit.jdbc_pool_c3p0.domain.Employee;
-import kr.or.dgit.jdbc_pool_c3p0.persistence.EmployeeDao;
-import kr.or.dgit.jdbc_pool_c3p0.persistence.EmployeeDaoImpl;
+import jdbc_pool_c3p0.domain.Employee;
+import jdbc_pool_c3p0.persistence.EmployeeDao;
+import jdbc_pool_c3p0.persistence.EmployeeDaoImpl;
 
 public class EmployeeService {
 	private EmployeeDao dao;

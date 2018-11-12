@@ -14,8 +14,8 @@ import org.junit.Test;
 
 import com.mchange.v2.c3p0.PooledDataSource;
 
-import kr.or.dgit.jdbc_pool_c3p0.jdbc.ConnectionProvider;
-import kr.or.dgit.jdbc_pool_c3p0.jdbc.DataSourceProvider;
+import jdbc_pool_c3p0.jdbc.ConnectionProvider;
+import jdbc_pool_c3p0.jdbc.DataSourceProvider;
 
 public class DBConnectionTest {
 	static final Logger log = LogManager.getLogger();

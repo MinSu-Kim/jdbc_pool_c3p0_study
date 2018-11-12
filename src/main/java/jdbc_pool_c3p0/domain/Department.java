@@ -1,4 +1,4 @@
-package kr.or.dgit.jdbc_pool_c3p0.domain;
+package jdbc_pool_c3p0.domain;
 
 public class Department {
 	private String deptNo;

@@ -1,4 +1,4 @@
-package kr.or.dgit.jdbc_pool_c3p0.persistence;
+package jdbc_pool_c3p0.persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,10 +9,10 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import kr.or.dgit.jdbc_pool_c3p0.domain.Department;
-import kr.or.dgit.jdbc_pool_c3p0.domain.Employee;
-import kr.or.dgit.jdbc_pool_c3p0.domain.Title;
-import kr.or.dgit.jdbc_pool_c3p0.jdbc.DataSourceProvider;
+import jdbc_pool_c3p0.domain.Department;
+import jdbc_pool_c3p0.domain.Employee;
+import jdbc_pool_c3p0.domain.Title;
+import jdbc_pool_c3p0.jdbc.DataSourceProvider;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 	private DataSource ds;

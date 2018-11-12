@@ -1,4 +1,4 @@
-package kr.or.dgit.jdbc_pool_c3p0.persistence;
+package jdbc_pool_c3p0.persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +9,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import kr.or.dgit.jdbc_pool_c3p0.domain.Title;
-import kr.or.dgit.jdbc_pool_c3p0.jdbc.DataSourceProvider;
-import kr.or.dgit.jdbc_pool_c3p0.jdbc.JdbcUtil;
+import jdbc_pool_c3p0.domain.Title;
+import jdbc_pool_c3p0.jdbc.DataSourceProvider;
+import jdbc_pool_c3p0.jdbc.JdbcUtil;
 
 public class TitleDaoImpl implements TitleDao {
 	private DataSource ds;
