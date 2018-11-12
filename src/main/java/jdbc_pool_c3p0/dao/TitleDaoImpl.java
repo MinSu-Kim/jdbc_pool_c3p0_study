@@ -1,4 +1,4 @@
-package jdbc_pool_c3p0.persistence;
+package jdbc_pool_c3p0.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,49 +7,51 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 
-import jdbc_pool_c3p0.domain.Title;
-import jdbc_pool_c3p0.jdbc.DataSourceProvider;
+import jdbc_pool_c3p0.dto.Title;
+import jdbc_pool_c3p0.jdbc.ConnectionProvider;
 import jdbc_pool_c3p0.jdbc.JdbcUtil;
+import jdbc_pool_c3p0.jdbc.LogUtil;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TitleDaoImpl implements TitleDao {
-	private DataSource ds;
-
-	public TitleDaoImpl() {
-		ds = DataSourceProvider.getDataSource();
-	}
 
 	@Override
 	public List<Title> selectTitleByAll() {
+		LogUtil.prnLog("selectTitleByAll()");
 		String sql = "select code, name from title";
 		List<Title> list = new ArrayList<>();
-		try (Connection con = ds.getConnection();
+		try (Connection con = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
+			LogUtil.prnLog(pstmt);
 			while (rs.next()) {
 				list.add(getTitle(rs));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.prnLog(e);
 		}
 		return list;
 	}
 
 	@Override
 	public Title selectTitleByCode(Title title) {
+		LogUtil.prnLog("selectTitleByCode()");
 		String sql = "select code, name from title where code=?";
 		Title res = null;
-		try (Connection con = ds.getConnection(); 
+		try (Connection con = ConnectionProvider.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, title.getCode());
+			LogUtil.prnLog(pstmt);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					res = getTitle(rs);
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.prnLog(e);
 		}
 		return res;
 	}
@@ -60,13 +62,15 @@ public class TitleDaoImpl implements TitleDao {
 
 	@Override
 	public int insertTitle(Title title) {
+		LogUtil.prnLog("insertTitle()");
 		String sql = "insert into title values(?, ?)";
 		int res = -1;
-		try (Connection con = ds.getConnection()) {
+		try (Connection con = ConnectionProvider.getConnection()) {
 			try (PreparedStatement pstmt = con.prepareStatement(sql)) {
 				con.setAutoCommit(false);
 				pstmt.setString(1, title.getCode());
 				pstmt.setString(2, title.getName());
+				LogUtil.prnLog(pstmt);
 				res = pstmt.executeUpdate();
 				con.commit();
 				con.setAutoCommit(true);
@@ -74,7 +78,7 @@ public class TitleDaoImpl implements TitleDao {
 				JdbcUtil.rollback(con);
 			}
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			LogUtil.prnLog(e1);
 		}
 
 		return res;
@@ -82,30 +86,34 @@ public class TitleDaoImpl implements TitleDao {
 
 	@Override
 	public int deleteTitle(String code) {
+		LogUtil.prnLog("deleteTitle()");
 		String sql = "delete from title where code = ?";
 		int res = -1;
-		try (Connection con = ds.getConnection(); 
+		try (Connection con = ConnectionProvider.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, code);
+			LogUtil.prnLog(pstmt);
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.prnLog(e);
 		}
 		return res;
 	}
 
 	@Override
 	public int updateTitle(Title title) {
+		LogUtil.prnLog("updateTitle()");
 		//code, name
 		String sql = "update title set name=? where code = ?";
 		int res = -1;
-		try (Connection con = ds.getConnection(); 
+		try (Connection con = ConnectionProvider.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, title.getName());
 			pstmt.setString(2, title.getCode());
+			LogUtil.prnLog(pstmt);
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.prnLog(e);
 		}
 		return res;
 	}

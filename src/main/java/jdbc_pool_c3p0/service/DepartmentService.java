@@ -2,9 +2,9 @@ package jdbc_pool_c3p0.service;
 
 import java.util.List;
 
-import jdbc_pool_c3p0.domain.Department;
-import jdbc_pool_c3p0.persistence.DepartmentDao;
-import jdbc_pool_c3p0.persistence.DepartmentDaoImpl;
+import jdbc_pool_c3p0.dao.DepartmentDao;
+import jdbc_pool_c3p0.dao.DepartmentDaoImpl;
+import jdbc_pool_c3p0.dto.Department;
 
 public class DepartmentService {
 	private DepartmentDao dao;

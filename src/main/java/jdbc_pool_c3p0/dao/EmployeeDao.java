@@ -1,8 +1,8 @@
-package jdbc_pool_c3p0.persistence;
+package jdbc_pool_c3p0.dao;
 
 import java.util.List;
 
-import jdbc_pool_c3p0.domain.Employee;
+import jdbc_pool_c3p0.dto.Employee;
 
 public interface EmployeeDao {
 	List<Employee> selectEmployeeByAll();

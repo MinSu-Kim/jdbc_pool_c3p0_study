@@ -1,4 +1,4 @@
-package jdbc_pool_c3p0.domain;
+package jdbc_pool_c3p0.dto;
 
 import java.util.Date;
 
@@ -98,7 +98,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return String.format("Employee [%s, %s, %s, %s, %s, %s, %s, %s]", empNo, empName, title.getCode(), salary,
+		return String.format("[%s, %s, %s, %s, %s, %s, %s, %s]", empNo, empName, title.getCode(), salary,
 				gender ? "여" : "남", hobby, dept.getDeptNo(), joinDate);
 	}
 

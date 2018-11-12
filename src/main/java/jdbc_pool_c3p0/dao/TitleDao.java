@@ -1,8 +1,8 @@
-package jdbc_pool_c3p0.persistence;
+package jdbc_pool_c3p0.dao;
 
 import java.util.List;
 
-import jdbc_pool_c3p0.domain.Title;
+import jdbc_pool_c3p0.dto.Title;
 
 public interface TitleDao {
 	List<Title> selectTitleByAll();

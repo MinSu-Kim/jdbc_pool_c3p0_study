@@ -2,7 +2,7 @@ package jdbc_pool_c3p0.ui.table;
 
 import javax.swing.SwingConstants;
 
-import jdbc_pool_c3p0.domain.Department;
+import jdbc_pool_c3p0.dto.Department;
 
 @SuppressWarnings("serial")
 public class DepartmentTablePanel extends AbstractTablePanel<Department> {

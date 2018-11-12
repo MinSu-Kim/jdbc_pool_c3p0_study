@@ -1,11 +1,14 @@
-package jdbc_pool_c3p0.domain;
+package jdbc_pool_c3p0.dto;
 
 public class Department {
 	private String deptNo;
 	private String deptName;
 	private int floor;
 
-	
+	public Department() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Department(String deptNo) {
 		this.deptNo = deptNo;
 	}
@@ -42,7 +45,7 @@ public class Department {
 
 	@Override
 	public String toString() {
-		return "Department [deptNo=" + deptNo + ", deptName=" + deptName + ", floor=" + floor + "]";
+		return String.format("[%s %s %s]", deptNo, deptName, floor);
 	}
 
 	@Override
@@ -70,5 +73,4 @@ public class Department {
 		return true;
 	}
 
-	
 }

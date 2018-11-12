@@ -11,7 +11,7 @@ repositories {
     jcenter()
 }
 
-mainClassName = 'kr.or.dgit.jdbc_pool_c3p0.Main'
+mainClassName = 'jdbc_pool_c3p0.Main'
 
 dependencies {
     // https://mvnrepository.com/artifact/com.mchange/c3p0

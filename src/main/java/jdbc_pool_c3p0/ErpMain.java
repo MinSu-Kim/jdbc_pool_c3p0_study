@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
-import jdbc_pool_c3p0.domain.Department;
-import jdbc_pool_c3p0.domain.Employee;
-import jdbc_pool_c3p0.domain.Title;
+import jdbc_pool_c3p0.dto.Department;
+import jdbc_pool_c3p0.dto.Employee;
+import jdbc_pool_c3p0.dto.Title;
 import jdbc_pool_c3p0.service.DepartmentService;
 import jdbc_pool_c3p0.service.EmployeeService;
 import jdbc_pool_c3p0.service.TitleService;

@@ -31,7 +31,7 @@ public class MyDataSource{
 
 			dataSource = DataSources.pooledDataSource(ds_unpooled, overrides);
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 
@@ -40,7 +40,7 @@ public class MyDataSource{
 		try (InputStream is = ClassLoader.getSystemResourceAsStream("db.properties")) {
 			properties.load(is);
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		return properties;
 	}

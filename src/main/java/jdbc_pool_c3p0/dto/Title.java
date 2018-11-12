@@ -1,4 +1,4 @@
-package jdbc_pool_c3p0.domain;
+package jdbc_pool_c3p0.dto;
 
 public class Title{
 	private String code;

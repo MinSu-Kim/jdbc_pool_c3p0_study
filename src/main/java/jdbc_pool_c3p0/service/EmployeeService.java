@@ -2,9 +2,9 @@ package jdbc_pool_c3p0.service;
 
 import java.util.List;
 
-import jdbc_pool_c3p0.domain.Employee;
-import jdbc_pool_c3p0.persistence.EmployeeDao;
-import jdbc_pool_c3p0.persistence.EmployeeDaoImpl;
+import jdbc_pool_c3p0.dao.EmployeeDao;
+import jdbc_pool_c3p0.dao.EmployeeDaoImpl;
+import jdbc_pool_c3p0.dto.Employee;
 
 public class EmployeeService {
 	private EmployeeDao dao;
