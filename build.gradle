@@ -11,7 +11,7 @@ repositories {
     jcenter()
 }
 
-mainClassName = 'jdbc_pool_c3p0.Main'
+mainClassName = 'jdbc_pool_c3p0_study.Main'
 
 dependencies {
     // https://mvnrepository.com/artifact/com.mchange/c3p0
